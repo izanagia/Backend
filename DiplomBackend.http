@@ -1,0 +1,85 @@
+@DiplomBackend_HostAddress = http://localhost:5261
+
+
+### Авторизация пользователя (POST)
+POST {{DiplomBackend_HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "password": "1234"
+}
+
+###
+
+### Регистрация пользователя (POST)
+POST {{DiplomBackend_HostAddress}}/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "Admin",
+  "password": "1234",
+  "fullName": "Кирилл Щербина",
+  "role": "Admin"
+}
+### 1. Создать группу
+POST {{baseUrl}}/api/admin/groups
+Content-Type: application/json
+
+"test"
+
+###
+
+### 2. Получить студентов
+GET {{baseUrl}}/api/admin/students
+
+###
+
+### 3. Добавить студента в группу
+POST {{baseUrl}}/api/admin/groups/1/add-student/3
+
+###
+
+### 4. Получить группы со студентами
+GET {{baseUrl}}/api/admin/groups
+
+### 
+POST {{DiplomBackend_HostAddress}}/api/admin/subjects
+Content-Type: application/json
+
+{
+  "name": "Математика"
+}
+
+###
+POST {{DiplomBackend_HostAddress}}/api/admin/subjects/assign-teacher
+Content-Type: application/json
+
+{
+  "subjectId": 1,
+  "teacherId": 3
+}
+
+###
+GET {{DiplomBackend_HostAddress}}/api/admin/subjects
+Accept: application/json
+
+###
+POST http://localhost:5261/api/admin/exams
+Content-Type: application/json
+
+{
+  "dateTime": "2025-06-20T10:00:00",
+  "roomNumber": "101",
+  "type": "Exam",
+  "subjectId": 1,
+  "teacherId": 2,
+  "groupId": 3
+}
+###
+POST http://localhost:5261/api/admin/gradesheets
+Content-Type: application/json
+
+{
+  "examId": 5
+}
